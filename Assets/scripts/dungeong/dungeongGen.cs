@@ -23,9 +23,9 @@ public class dungeongGen : MonoBehaviour {
         int[][] tiles;
         tiles = SetupMap(sizeX, sizeY);
         tiles = Fillarray(tiles);
-        for (int i = 0; i < RandomTileX(sizeX); i++)
+        for (int i = 0; i < util.RandomInt(0,sizeX); i++)
         {
-            tiles = CreateRoom(RandomTileX(sizeX), RandomTileY(sizeY), tiles);
+            tiles = CreateRoom(util.RandomInt(0,sizeX), util.RandomInt(0,sizeY), tiles);
         }
 
         RenderTiles(tiles);
@@ -62,42 +62,39 @@ public class dungeongGen : MonoBehaviour {
         return tiles;
     }
 
-    // picks a random start tile 
-    int RandomTileX(int sizeX)
-    {
-        return Random.Range(0, sizeX);;
+
+    public rooms CreateRoom(){
+        rooms room = new rooms(util.RandomInt(0,));
+
+
+        return room
     }
 
-    int RandomTileY(int sizeY)
-    {
-        return Random.Range(0, sizeY); ;
-    }
+    //int[][] CreateRoom(int cordX, int cordY, int[][] tiles)
+    //{   
+    //    int roomSize = Random.Range(0, 8);
+    //    bool inBound;
 
-    int[][] CreateRoom(int cordX, int cordY, int[][] tiles)
-    {   
-        int roomSize = Random.Range(0, 8);
-        bool inBound;
+    //    inBound = TileOutOfBound(tiles, cordX, cordY, roomSize);
 
-        inBound = TileOutOfBound(tiles, cordX, cordY, roomSize);
+    //    if(!inBound){
+    //        int i = cordX;
+    //        for (int ii = cordY; ii < cordY + roomSize; ii++)
+    //        {   
+    //            Debug.Log("i: " + i);
+    //            Debug.Log("ii: " + ii);
+    //            tiles[i][ii] = 1; 
+    //            if(ii == cordY + roomSize - 1 && i < cordX + roomSize -1){
+    //                i++;
+    //                ii = cordY - 1;
+    //            }
+    //        }
 
-        if(!inBound){
-            int i = cordX;
-            for (int ii = cordY; ii < cordY + roomSize; ii++)
-            {   
-                Debug.Log("i: " + i);
-                Debug.Log("ii: " + ii);
-                tiles[i][ii] = 1; 
-                if(ii == cordY + roomSize - 1 && i < cordX + roomSize -1){
-                    i++;
-                    ii = cordY - 1;
-                }
-            }
-
-        }
+    //    }
 
        
-        return tiles;
-    }
+    //    return tiles;
+    //}
 
     bool TileOutOfBound(int[][] tiles, int cordX, int cordY, int roomSize){
 
