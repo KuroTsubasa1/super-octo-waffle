@@ -10,6 +10,8 @@ public class Room
     private int roomSizeX;
     private int roomSizeY;
     private Dungeon dungeon;
+    private int[] usedTiles;
+    private int[,,] cordSet;
 
     public Room(int x, int y, Dungeon dungeon)
     {
@@ -23,7 +25,25 @@ public class Room
     public void CreateRoom(){
         bool inBound;
         inBound = TileOutOfBound();
-    }
+
+        if (!inBound)
+        {
+            int counterArray = 0;
+            int counterX = cordX;
+            for (int i = cordY; i < cordY + roomSizeY; i++)
+            {
+                cordSet[counterX,i,i] = 
+                usedTiles[counterArray] = cordSet[cordX + i, cordY + i, 1];
+                if (cordY + i == cordY + roomSizeY - 1 && cordX + counterX < cordX + roomSizeX -1)
+                {
+                    counterX++;
+                    i = cordY - 1;
+                }
+                counterArray++;
+            }
+        }
+
+        }
 
     bool TileOutOfBound()
     {
@@ -36,33 +56,6 @@ public class Room
             return true;
         }
     }
-
-    //int[][] CreateRoom(int cordX, int cordY, int[][] tiles)
-    //{   
-    //    int roomSize = Random.Range(0, 8);
-    //    bool inBound;
-
-    //    inBound = TileOutOfBound(tiles, cordX, cordY, roomSize);
-
-    //    if(!inBound){
-    //        int i = cordX;
-    //        for (int ii = cordY; ii < cordY + roomSize; ii++)
-    //        {   
-    //            Debug.Log("i: " + i);
-    //            Debug.Log("ii: " + ii);
-    //            tiles[i][ii] = 1; 
-    //            if(ii == cordY + roomSize - 1 && i < cordX + roomSize -1){
-    //                i++;
-    //                ii = cordY - 1;
-    //            }
-    //        }
-
-    //    }
-
-
-    //    return tiles;
-    //}
-
 }
 
 
