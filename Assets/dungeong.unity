@@ -187,7 +187,6 @@ GameObject:
   m_Component:
   - component: {fileID: 768645342}
   - component: {fileID: 768645341}
-  - component: {fileID: 768645343}
   m_Layer: 0
   m_Name: DungeongSpawner
   m_TagString: Untagged
@@ -201,14 +200,22 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 768645340}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06d872cde6f794ee4ba095ab9e7f661f, type: 3}
+  m_Script: {fileID: 11500000, guid: 238a2a451c4024e15b495f2431a581f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  solidWall: {fileID: 1474300062664600, guid: f10b99a96b87b436c94f7c10d640a902, type: 2}
-  wall: {fileID: 1269956016519102, guid: d01e28c7c5c4b439486154f9d9e5a79e, type: 2}
-  floor: {fileID: 1575376927634690, guid: 1a9114e3ad167407090c94ed406bd074, type: 2}
+  dungeongSizeXMax: 100
+  dungeongSizeXMin: 10
+  dungeongSizeYMax: 100
+  dungeongSizeYMin: 10
+  roomSizeXMax: 90
+  roomSizeXMin: 5
+  roomSizeYMax: 90
+  roomSizeYMin: 5
+  stepSize: 1
+  solidWall: {fileID: 1575376927634690, guid: 1a9114e3ad167407090c94ed406bd074, type: 2}
+  wall: {fileID: 1474300062664600, guid: f10b99a96b87b436c94f7c10d640a902, type: 2}
 --- !u!4 &768645342
 Transform:
   m_ObjectHideFlags: 0
@@ -222,22 +229,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &768645343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 768645340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5293a16c1b3e453c812daf050f21fb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  solidWall: {fileID: 1994151738805122, guid: 5efc8f9e962b14138a2b5f5dc30e46c9, type: 2}
-  wall: {fileID: 1421939003588344, guid: 6865d7a1a119b48a9aaaf7ada027d526, type: 2}
-  floor: {fileID: 1575376927634690, guid: 1a9114e3ad167407090c94ed406bd074, type: 2}
-  player: {fileID: 0}
-  tileSpread: 2
 --- !u!1001 &1655537895
 Prefab:
   m_ObjectHideFlags: 0
