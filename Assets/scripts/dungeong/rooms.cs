@@ -34,7 +34,6 @@ public class Room
         this.roomSizeYMax = roomSizeYMax;
         this.dungeon = dungeon;
         CreateRoom();
-
     }
 
     /// <summary>
@@ -44,25 +43,17 @@ public class Room
     {
         bool inBound;
         inBound = TileOutOfBound();
-        Debug.Log("roomSizeX " + roomSizeX);
-        Debug.Log("roomSizeY" + roomSizeY);
-        Debug.Log("result " + inBound);
         if(inBound)
         {
-            int ix = cordX;
-            for (int iy = cordY; iy < roomSizeY; iy++)
+            int ix = 0;
+            for (int iy = 0; iy < roomSizeY; iy++)
             {
-                // this.data = [ix, iy, 1];
-                //Debug.Log("added " + ix + " to List");
-                this.data.Add(ix);
-                //Debug.Log("added " + iy + " to List");
-                this.data.Add(iy);
-                //Debug.Log("added " + 1 + " to List");
+                this.data.Add(cordX + ix);
+                this.data.Add(cordY + iy);
                 this.data.Add(1);
-
                 if (iy == roomSizeY - 1 && ix < roomSizeX -1 )
                 {
-                    iy = cordY -1;
+                    iy = -1;
                     ix++;
                 }
             }
@@ -83,7 +74,6 @@ public class Room
     /// <returns><c>true</c>, if out of bound was tiled, <c>false</c> otherwise.</returns>
     bool TileOutOfBound()
     {
-        Debug.Log(cordX + roomSizeX + " < " + dungeon.GetSizeX() + " && " + cordY + roomSizeY + " < " + dungeon.GetSizeY());
         if (cordX + roomSizeX < dungeon.GetSizeX() && cordY + roomSizeY < dungeon.GetSizeY())
         {
             return true;

@@ -33,8 +33,8 @@ public class DungeonGenerator : MonoBehaviour {
     private GameObject wall;
 
     // Use this for initialization
-    void Start () {
-
+    void Start () 
+    {
         Dungeon dungeon = new Dungeon ( util.RandomInt (dungeongSizeXMin, dungeongSizeXMax), util.RandomInt (dungeongSizeYMax, dungeongSizeYMin));
 
         Room room = new Room(util.RandomInt(dungeongSizeXMin, dungeongSizeXMax), util.RandomInt(dungeongSizeYMax, dungeongSizeYMin), roomSizeXMin, roomSizeXMax, roomSizeYMin, roomSizeYMax, dungeon);
@@ -48,8 +48,8 @@ public class DungeonGenerator : MonoBehaviour {
         //}
         //Debug.Log("-----------------------");
 
-        Debug.Log(dungeon.GetSizeX());
-        Debug.Log(dungeon.GetSizeY());
+        Debug.Log(" Dungeon Size X " + dungeon.GetSizeX());
+        Debug.Log(" Dungeon Size Y " +dungeon.GetSizeY());
 
         int[,] map = dungeon.GetMap();
 
@@ -65,13 +65,17 @@ public class DungeonGenerator : MonoBehaviour {
     /// <param name="sizeX">Size x.</param>
     /// <param name="sizeY">Size y.</param>
     void RenderMap(int[,] map, int sizeX, int sizeY)
-	{	
+	{
+
+        // really stupid way to this
+        string dungeonRow = "";
+
 		int ix = 0;
 		for (int iy = 0; iy <sizeY; iy++) 
-		{	
+		{
             // dataview
-            print("ix : " + ix + " " + "iy :" + iy + " " + "value : " + map[ix, iy]);
-            WriteMapToFile(map[ix, iy].ToString());
+            //print("ix : " + ix + " " + "iy :" + iy + " " + "value : " + map[ix, iy]);
+            dungeonRow += map[ix, iy].ToString();
 
             switch(map[ix, iy])
             {
@@ -86,7 +90,8 @@ public class DungeonGenerator : MonoBehaviour {
            
 			if (iy == sizeY-1 && ix < sizeX -1) 
             {
-                WriteMapToFile("\n");   
+                Debug.Log(dungeonRow);
+                dungeonRow = "";
 				iy = -1;
 				ix++;
 			}
@@ -107,14 +112,14 @@ public class DungeonGenerator : MonoBehaviour {
 
         int dataSetLenght = 3; 
 
-        Debug.Log("count " + roomList.Count);
-        Debug.Log("map " + map.Length);
+        //Debug.Log("count " + roomList.Count);
+        //Debug.Log("map " + map.Length);
 
         for (int i = 0; i < roomList.Count; i+= dataSetLenght)
         {   
-            Debug.Log("ix " + ix + " value " + roomList[ix]);
-            Debug.Log("iy " + iy + " value " + roomList[iy]);
-            Debug.Log("iv " + iv + " value " + roomList[iv]);
+            //Debug.Log("ix " + ix + " value " + roomList[ix]);
+            //Debug.Log("iy " + iy + " value " + roomList[iy]);
+            //Debug.Log("iv " + iv + " value " + roomList[iv]);
             map[roomList[ix], roomList[iy]] = roomList[iv];
             ix += dataSetLenght;
             iy += dataSetLenght;
@@ -128,14 +133,4 @@ public class DungeonGenerator : MonoBehaviour {
 	void Update () {
 	}
 
-    /// <summary>
-    /// Writes the map to file.
-    /// </summary>
-    /// <param name="input">Input.</param>
-    void WriteMapToFile(String input)
-    {
-        string path =   "/Users/harmlasse/Documents/super-octo-waffle/Assets/scripts/";
-        File.Create(path);
-        File.WriteAllText(path, input);
-    }
 }
