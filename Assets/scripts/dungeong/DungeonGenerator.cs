@@ -58,6 +58,12 @@ public class DungeonGenerator : MonoBehaviour {
 
 	}
 
+    /// <summary>
+    /// Renders the map.
+    /// </summary>
+    /// <param name="map">Map.</param>
+    /// <param name="sizeX">Size x.</param>
+    /// <param name="sizeY">Size y.</param>
     void RenderMap(int[,] map, int sizeX, int sizeY)
 	{	
 		int ix = 0;
@@ -75,7 +81,6 @@ public class DungeonGenerator : MonoBehaviour {
 
                 case 1:
                     Instantiate(wall, new Vector3(ix, 0, iy), Quaternion.identity);
-                    StartCoroutine(Example());
                     break;
             }
            
@@ -88,6 +93,12 @@ public class DungeonGenerator : MonoBehaviour {
 		}
 	}
 
+    /// <summary>
+    /// Updates the map.
+    /// </summary>
+    /// <returns>The map.</returns>
+    /// <param name="map">Map.</param>
+    /// <param name="roomList">Room list.</param>
     int[,] UpdateMap(int[,] map, List<int> roomList)
     {
         int ix = 0;
@@ -117,15 +128,13 @@ public class DungeonGenerator : MonoBehaviour {
 	void Update () {
 	}
 
-    IEnumerator Example()
-    {
-        yield return new WaitForSeconds(10);
-        print("test");
-    }
-
+    /// <summary>
+    /// Writes the map to file.
+    /// </summary>
+    /// <param name="input">Input.</param>
     void WriteMapToFile(String input)
     {
-        string path = "/Users/harmlasse/Documents/super-octo-waffle/Assets/scripts/";
+        string path =   "/Users/harmlasse/Documents/super-octo-waffle/Assets/scripts/";
         File.Create(path);
         File.WriteAllText(path, input);
     }

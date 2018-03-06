@@ -37,6 +37,9 @@ public class Room
 
     }
 
+    /// <summary>
+    /// Creates the room.
+    /// </summary>
     public void CreateRoom()
     {
         bool inBound;
@@ -74,6 +77,10 @@ public class Room
         }
     }
 
+    /// <summary>
+    /// Tiles the out of bound.
+    /// </summary>
+    /// <returns><c>true</c>, if out of bound was tiled, <c>false</c> otherwise.</returns>
     bool TileOutOfBound()
     {
         Debug.Log(cordX + roomSizeX + " < " + dungeon.GetSizeX() + " && " + cordY + roomSizeY + " < " + dungeon.GetSizeY());
