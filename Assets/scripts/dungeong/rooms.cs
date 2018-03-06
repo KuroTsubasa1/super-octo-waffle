@@ -14,6 +14,8 @@ public class Room
     private int roomSizeYMin;
     private int roomSizeYMax;
     private Dungeon dungeon;
+    private int[] usedTiles;
+    private int[,,] cordSet;
 
     //private int[] data;
     private List<int> data = new List<int>();
@@ -57,7 +59,7 @@ public class Room
 
                 if (iy == roomSizeY - 1 && ix < roomSizeX -1 )
                 {
-                    iy = cordY -1; 
+                    iy = cordY -1;
                     ix++;
                 }
             }
@@ -73,7 +75,7 @@ public class Room
     }
 
     bool TileOutOfBound()
-    {   
+    {
         Debug.Log(cordX + roomSizeX + " < " + dungeon.GetSizeX() + " && " + cordY + roomSizeY + " < " + dungeon.GetSizeY());
         if (cordX + roomSizeX < dungeon.GetSizeX() && cordY + roomSizeY < dungeon.GetSizeY())
         {
@@ -91,7 +93,3 @@ public class Room
     }
 
 }
-
-
-
- 
