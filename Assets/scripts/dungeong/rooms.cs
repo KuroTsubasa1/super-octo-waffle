@@ -18,6 +18,9 @@ public class Room
     //private int[] data;   
     private List<int> data = new List<int>();
 
+    //
+    private List<int> edge = new List<int>();
+
     public Room(int cordX, int cordY, int roomSizeXMin, int roomSizeXMax, int roomSizeYMin, int roomSizeYMax, Dungeon dungeon)
     {
         this.cordX = cordX;
@@ -48,11 +51,12 @@ public class Room
                 // edge detection
                 if (iy == 0 || iy == roomSizeY - 1 || ix == 0 || ix == roomSizeX - 1)
                 {
-                    // add cords to roomList 
                     this.data.Add(cordX + ix);
                     this.data.Add(cordY + iy);
-                    // add tile type 
                     this.data.Add(2); // edge tile
+
+                    edge.Add(cordX + ix);
+                    edge.Add(cordY + iy);
                 }
                 else
                 {
@@ -109,4 +113,18 @@ public class Room
         return this.data;
     }
 
+    public List<int> GetEdgeList()
+    {
+        return this.edge;
+    }
+
+    public int GetRoomSIzeX()
+    {
+        return this.roomSizeX;
+    }
+
+    public int GetRoomSIzeY()
+    {
+        return this.roomSizeY;
+    }
 }

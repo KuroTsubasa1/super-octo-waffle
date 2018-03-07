@@ -24,6 +24,7 @@ public class DungeonGenerator : MonoBehaviour {
     [SerializeField]
     private int roomSizeYMin = 5;
 
+
     [SerializeField]
     private int stepSize = 1;
 
@@ -36,17 +37,30 @@ public class DungeonGenerator : MonoBehaviour {
     [SerializeField]
     private GameObject corner;
 
+    // floor variations
+    [SerializeField]
+    private GameObject[] floor = new GameObject[4];
+
+
     // Use this for initialization
     void Start () 
     {
         Dungeon dungeon = new Dungeon ( util.RandomInt (dungeongSizeXMin, dungeongSizeXMax), util.RandomInt (dungeongSizeYMax, dungeongSizeYMin));
 
-        Room room = new Room(util.RandomInt(dungeongSizeXMin, dungeongSizeXMax), util.RandomInt(dungeongSizeYMax, dungeongSizeYMin), roomSizeXMin, roomSizeXMax, roomSizeYMin, roomSizeYMax, dungeon);
+        // this is bullshit but needed for init the array for now ...
+        int[,] map = map = dungeon.GetMap();
 
-        var roomList = room.GetRoomList();
-        int[,] map = dungeon.GetMap();
+       
+            Room room = new Room(util.RandomInt(dungeongSizeXMin, dungeongSizeXMax), util.RandomInt(dungeongSizeYMax, dungeongSizeYMin), roomSizeXMin, roomSizeXMax, roomSizeYMin, roomSizeYMax, dungeon);
 
-        map = UpdateMap(map,roomList);
+            var roomList = room.GetRoomList();
+            map = dungeon.GetMap();
+
+            map = UpdateMap(map, roomList);
+
+       
+
+
         RenderMap(map,dungeon.GetSizeX(),dungeon.GetSizeY());
 
 	}
@@ -72,18 +86,27 @@ public class DungeonGenerator : MonoBehaviour {
             switch(map[ix, iy])
             {
                 case 0:
-                    Instantiate(solidWall, new Vector3(ix, 0, iy), Quaternion.identity);
+                    var wallss = Instantiate(wall, new Vector3(ix, -0.5f, iy), Quaternion.identity);
+                    wallss.transform.eulerAngles = new Vector3(-90, 0, 0);
+                    wallss.transform.localScale = new Vector3(50, 50, 50);
                     break;
 
                 case 1:
-                    Instantiate(wall, new Vector3(ix, 0, iy), Quaternion.identity);
+                    var floor_ = Instantiate(floor[util.RandomInt(0, floor.Length - 1)], new Vector3(ix, -0.5f, iy), Quaternion.identity);
+                    floor_.transform.eulerAngles = new Vector3(-90, 0, 0);
+                    floor_.transform.localScale = new Vector3(50, 50, 50);
                     break;
 
                 case 2:
-                    Instantiate(edge, new Vector3(ix, 0, iy), Quaternion.identity);
+                    var edge_ = Instantiate(edge, new Vector3(ix, -0.5f, iy), Quaternion.identity);
+                    edge_.transform.eulerAngles = new Vector3(-90, 0, 0);
+                    edge_.transform.localScale = new Vector3(50, 50, 50);
                     break;
                 case 3:
-                    Instantiate(corner, new Vector3(ix, 0, iy), Quaternion.identity);
+                    var corner_ = Instantiate(corner, new Vector3(ix, -0.5f, iy), Quaternion.identity);
+                    corner_.transform.eulerAngles = new Vector3(-90, 0, 0);
+                    corner_.transform.localScale = new Vector3(50, 50, 50);
+
                     break;
             }
            
