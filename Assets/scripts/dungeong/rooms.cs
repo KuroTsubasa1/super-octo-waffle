@@ -14,13 +14,9 @@ public class Room
     private int roomSizeYMin;
     private int roomSizeYMax;
     private Dungeon dungeon;
-    private int[] usedTiles;
-    private int[,,] cordSet;
 
-    //private int[] data;
+    //private int[] data;   
     private List<int> data = new List<int>();
-    private Dictionary<string, List<int>> data2;
-    private int[] container;
 
     public Room(int cordX, int cordY, int roomSizeXMin, int roomSizeXMax, int roomSizeYMin, int roomSizeYMax, Dungeon dungeon)
     {
@@ -43,15 +39,39 @@ public class Room
     {
         bool inBound;
         inBound = TileOutOfBound();
-        if(inBound)
+        if (inBound)
         {
             int ix = 0;
             for (int iy = 0; iy < roomSizeY; iy++)
             {
-                this.data.Add(cordX + ix);
-                this.data.Add(cordY + iy);
-                this.data.Add(1);
-                if (iy == roomSizeY - 1 && ix < roomSizeX -1 )
+
+                // edge detection
+                if (iy == 0 || iy == roomSizeY - 1 || ix == 0 || ix == roomSizeX - 1)
+                {
+                    // add cords to roomList 
+                    this.data.Add(cordX + ix);
+                    this.data.Add(cordY + iy);
+                    // add tile type 
+                    this.data.Add(2); // edge tile
+                }
+                else
+                {
+                    this.data.Add(cordX + ix);
+                    this.data.Add(cordY + iy);
+                    this.data.Add(1); // floor tile
+
+                }
+
+                // corner detection
+                if (iy == 0 && ix == 0 || iy == roomSizeY - 1 && ix == 0 || iy == 0 && ix == roomSizeX - 1 ||iy == roomSizeY - 1 && ix == roomSizeX - 1)
+                {
+                    this.data.Add(cordX + ix);
+                    this.data.Add(cordY + iy);
+                    this.data.Add(3); // corner tile
+ 
+                }
+
+                if (iy == roomSizeY - 1 && ix < roomSizeX - 1)
                 {
                     iy = -1;
                     ix++;

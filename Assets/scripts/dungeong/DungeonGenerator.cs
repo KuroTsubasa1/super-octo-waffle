@@ -31,6 +31,10 @@ public class DungeonGenerator : MonoBehaviour {
     private GameObject solidWall;
     [SerializeField]
     private GameObject wall;
+    [SerializeField]
+    private GameObject edge;
+    [SerializeField]
+    private GameObject corner;
 
     // Use this for initialization
     void Start () 
@@ -40,17 +44,6 @@ public class DungeonGenerator : MonoBehaviour {
         Room room = new Room(util.RandomInt(dungeongSizeXMin, dungeongSizeXMax), util.RandomInt(dungeongSizeYMax, dungeongSizeYMin), roomSizeXMin, roomSizeXMax, roomSizeYMin, roomSizeYMax, dungeon);
 
         var roomList = room.GetRoomList();
-
-        //Debug.Log("-----------------------");
-        //foreach (object o in roomList)
-        //{
-        //    Debug.Log(o);
-        //}
-        //Debug.Log("-----------------------");
-
-        Debug.Log(" Dungeon Size X " + dungeon.GetSizeX());
-        Debug.Log(" Dungeon Size Y " +dungeon.GetSizeY());
-
         int[,] map = dungeon.GetMap();
 
         map = UpdateMap(map,roomList);
@@ -74,7 +67,6 @@ public class DungeonGenerator : MonoBehaviour {
 		for (int iy = 0; iy <sizeY; iy++) 
 		{
             // dataview
-            //print("ix : " + ix + " " + "iy :" + iy + " " + "value : " + map[ix, iy]);
             dungeonRow += map[ix, iy].ToString();
 
             switch(map[ix, iy])
@@ -85,6 +77,13 @@ public class DungeonGenerator : MonoBehaviour {
 
                 case 1:
                     Instantiate(wall, new Vector3(ix, 0, iy), Quaternion.identity);
+                    break;
+
+                case 2:
+                    Instantiate(edge, new Vector3(ix, 0, iy), Quaternion.identity);
+                    break;
+                case 3:
+                    Instantiate(corner, new Vector3(ix, 0, iy), Quaternion.identity);
                     break;
             }
            
@@ -112,14 +111,8 @@ public class DungeonGenerator : MonoBehaviour {
 
         int dataSetLenght = 3; 
 
-        //Debug.Log("count " + roomList.Count);
-        //Debug.Log("map " + map.Length);
-
         for (int i = 0; i < roomList.Count; i+= dataSetLenght)
         {   
-            //Debug.Log("ix " + ix + " value " + roomList[ix]);
-            //Debug.Log("iy " + iy + " value " + roomList[iy]);
-            //Debug.Log("iv " + iv + " value " + roomList[iv]);
             map[roomList[ix], roomList[iy]] = roomList[iv];
             ix += dataSetLenght;
             iy += dataSetLenght;
@@ -132,5 +125,6 @@ public class DungeonGenerator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	}
+
 
 }
