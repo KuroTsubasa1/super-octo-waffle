@@ -97,13 +97,18 @@ public class Coridor{
         this.data.Add(cordY);
         this.data.Add(99);
 
+        this.data.Add(edgeList[randomCordX + 2] );
+        this.data.Add(edgeList[randomCordX + 3]);
+        this.data.Add(99);
+
+
         // determine if edge is horizontal or vertical
         
-        if(edgeList[randomCordX] + 1 == edgeList[randomCordX + 2])
+        if(edgeList[randomCordX] + 1 == edgeList[randomCordX + 2] && edgeList[randomCordX] + 1 < room.GetRoomSIzeX())
         {
             Debug.Log(edgeList[randomCordX + 2]);
             Debug.Log(edgeList[randomCordX + 3]);
-            Debug.Log("Horizontal");
+            Debug.Log("Vertical");
 
         }
 

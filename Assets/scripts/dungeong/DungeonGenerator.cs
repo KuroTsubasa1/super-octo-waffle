@@ -76,16 +76,19 @@ public class DungeonGenerator : MonoBehaviour {
         // this is bullshit but needed for init the array for now ...
         int[,] map = map = dungeon.GetMap();
 
-       
-		Room room = new Room(util.RandomInt(dungeongSizeXMin, dungeongSizeXMax), util.RandomInt(dungeongSizeYMax, dungeongSizeYMin), roomSizeXMin, roomSizeXMax, roomSizeYMin, roomSizeYMax, dungeon);
-        Coridor coridor = new Coridor(room, coridorSizeXMax, coridorSizeXMin, coridorSizeYMax, coridorSizeYMax);
-		var roomList = room.GetRoomList();
-		map = dungeon.GetMap();
-		map = UpdateMap(map, roomList);
+        for (int i = 0; i < 5; i++)
+        {
+            Room room = new Room(util.RandomInt(dungeongSizeXMin, dungeongSizeXMax), util.RandomInt(dungeongSizeYMax, dungeongSizeYMin), roomSizeXMin, roomSizeXMax, roomSizeYMin, roomSizeYMax, dungeon);
+            Coridor coridor = new Coridor(room, coridorSizeXMax, coridorSizeXMin, coridorSizeYMax, coridorSizeYMax);
+            var roomList = room.GetRoomList();
+            map = dungeon.GetMap();
+            map = UpdateMap(map, roomList);
 
-        // update coridors 
-        roomList = coridor.GetRoomList();
-        map = UpdateMap(map, roomList);
+            // update coridors 
+            roomList = coridor.GetRoomList();
+            map = UpdateMap(map, roomList);
+        }
+
 
         RenderMap(map,dungeon.GetSizeX(),dungeon.GetSizeY());
 	}
