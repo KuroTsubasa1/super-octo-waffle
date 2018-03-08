@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using System.IO;
+
 
 public class DungeonGenerator : MonoBehaviour {
 
@@ -24,6 +23,16 @@ public class DungeonGenerator : MonoBehaviour {
     [SerializeField]
     private int roomSizeYMin = 5;
 
+    [SerializeField]
+    private int coridorSizeXMax = 2;
+    [SerializeField]
+    private int coridorSizeXMin = 2;
+    [SerializeField]
+    private int coridorSizeYMax = 2;
+    [SerializeField]
+    private int coridorSizeYMin = 2;
+
+
 
     [SerializeField]
     private int stepSize = 1;
@@ -41,28 +50,44 @@ public class DungeonGenerator : MonoBehaviour {
     [SerializeField]
     private GameObject[] floor = new GameObject[4];
 
+    [SerializeField]
+    private GameObject startPosition;
+
+    [SerializeField]
+    private int seed = 0;
+
 
     // Use this for initialization
     void Start () 
-    {
+    {      
+        // check for random seed
+        if(seed == 0){
+            seed = Random.seed;
+            Debug.Log("The session seed is " + seed);
+        }
+        else
+        {
+            Random.InitState(seed);
+        }
+
+
         Dungeon dungeon = new Dungeon ( util.RandomInt (dungeongSizeXMin, dungeongSizeXMax), util.RandomInt (dungeongSizeYMax, dungeongSizeYMin));
 
         // this is bullshit but needed for init the array for now ...
         int[,] map = map = dungeon.GetMap();
 
        
-            Room room = new Room(util.RandomInt(dungeongSizeXMin, dungeongSizeXMax), util.RandomInt(dungeongSizeYMax, dungeongSizeYMin), roomSizeXMin, roomSizeXMax, roomSizeYMin, roomSizeYMax, dungeon);
+		Room room = new Room(util.RandomInt(dungeongSizeXMin, dungeongSizeXMax), util.RandomInt(dungeongSizeYMax, dungeongSizeYMin), roomSizeXMin, roomSizeXMax, roomSizeYMin, roomSizeYMax, dungeon);
+        Coridor coridor = new Coridor(room, coridorSizeXMax, coridorSizeXMin, coridorSizeYMax, coridorSizeYMax);
+		var roomList = room.GetRoomList();
+		map = dungeon.GetMap();
+		map = UpdateMap(map, roomList);
 
-            var roomList = room.GetRoomList();
-            map = dungeon.GetMap();
-
-            map = UpdateMap(map, roomList);
-
-       
-
+        // update coridors 
+        roomList = coridor.GetRoomList();
+        map = UpdateMap(map, roomList);
 
         RenderMap(map,dungeon.GetSizeX(),dungeon.GetSizeY());
-
 	}
 
     /// <summary>
@@ -106,7 +131,11 @@ public class DungeonGenerator : MonoBehaviour {
                     var corner_ = Instantiate(corner, new Vector3(ix, -0.5f, iy), Quaternion.identity);
                     corner_.transform.eulerAngles = new Vector3(-90, 0, 0);
                     corner_.transform.localScale = new Vector3(50, 50, 50);
-
+                    break;
+                case 99:    // wip start position for coridor
+                    var start = Instantiate(startPosition, new Vector3(ix, -0.5f, iy), Quaternion.identity);
+                    start.transform.eulerAngles = new Vector3(-90, 0, 0);
+                    start.transform.localScale = new Vector3(50, 50, 50);
                     break;
             }
            
