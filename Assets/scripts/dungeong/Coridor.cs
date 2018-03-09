@@ -27,7 +27,7 @@ public class Coridor{
 
     public void CreateCoridor()
     {
-        List<int> edgeList = room.GetEdgeList();
+        List<int> edgeList = room.GetEdgeList(); // edgeList only contains contains (x,y) cords
 
         int randomCordX = util.RandomInt(0, edgeList.Count - 1);
         int startcord = edgeList[randomCordX]; 
@@ -89,22 +89,65 @@ public class Coridor{
 
     private int CheckCordPosition(int cordX, int cordY, List<int> edgeList, int randomCordX)
     {
+
+        // safety first check for corner  + 1 in every direction
+        // cals corners
+        // room.x ,room Y -> first corner
+        // rrom
+
+        // shoould be move later
+        bool loop = true;
+        do
+        {
+            List<int> cornerList = room.GetCornerList(); // dataset of 2 
+            if (edgeList[randomCordX] == cornerList[0] || edgeList[randomCordX] == cornerList[2] || edgeList[randomCordX] == cornerList[4] || edgeList[randomCordX] == cornerList[6])
+            {
+                randomCordX = NewRandomX();
+                if (edgeList[randomCordX] == cornerList[0] || edgeList[randomCordX] == cornerList[2] || edgeList[randomCordX] == cornerList[4] || edgeList[randomCordX] == cornerList[6])
+                {
+                    loop = false;
+                }
+            }
+        } while (loop == true);
+       
+
         int number = 0;
         Debug.Log("Startpos X " + cordX);
         Debug.Log("Startpos Y " + cordY);
 
+        // mark start point of coridor
         this.data.Add(cordX );
         this.data.Add(cordY);
         this.data.Add(99);
 
+        // tile next to start  
+        // this hat to cahnge for horizontal 
         this.data.Add(edgeList[randomCordX + 2] );
         this.data.Add(edgeList[randomCordX + 3]);
         this.data.Add(99);
 
 
         // determine if edge is horizontal or vertical
-        
+        /*
+         * This is pretty hard to do ....
+         * or im just to stupid XD 
+        */
+
+        // vertical up
         if(edgeList[randomCordX] + 1 == edgeList[randomCordX + 2] && edgeList[randomCordX] + 1 < room.GetRoomSIzeX())
+        {   
+
+            Debug.Log(edgeList[randomCordX + 2]);
+            Debug.Log(edgeList[randomCordX + 3]);
+            Debug.Log("Vertical");
+
+        }
+
+        // vertical down
+
+        if(edgeList[randomCordX] == room.GetRoomSIzeX() )
+
+        if (edgeList[randomCordX] + 2 == edgeList[randomCordX + 2] && edgeList[randomCordX] + 1 < room.GetRoomSIzeX())
         {
             Debug.Log(edgeList[randomCordX + 2]);
             Debug.Log(edgeList[randomCordX + 3]);
@@ -126,11 +169,14 @@ public class Coridor{
             return false;
         }
     }
+           private int NewRandomX()
+        {
+            return  util.RandomInt(0, room.GetEdgeList().Count - 1);
+        }
 
     public List<int> GetRoomList()
     {
         return this.data;
     }
-
 
 }

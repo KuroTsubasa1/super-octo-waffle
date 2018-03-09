@@ -15,11 +15,13 @@ public class Room
     private int roomSizeYMax;
     private Dungeon dungeon;
 
+
     //private int[] data;   
     private List<int> data = new List<int>();
 
     //
     private List<int> edge = new List<int>();
+    private List<int> corner = new List<int>();
 
     public Room(int cordX, int cordY, int roomSizeXMin, int roomSizeXMax, int roomSizeYMin, int roomSizeYMax, Dungeon dungeon)
     {
@@ -55,8 +57,8 @@ public class Room
                     this.data.Add(cordY + iy);
                     this.data.Add(2); // edge tile
 
-                    edge.Add(cordX + ix);
-                    edge.Add(cordY + iy);
+                    this.edge.Add(cordX + ix);
+                    this.edge.Add(cordY + iy);
                 }
                 else
                 {
@@ -72,6 +74,9 @@ public class Room
                     this.data.Add(cordX + ix);
                     this.data.Add(cordY + iy);
                     this.data.Add(3); // corner tile
+
+                    this.corner.Add(cordX + ix);
+                    this.corner.Add(cordY + iy);
  
                 }
 
@@ -116,6 +121,11 @@ public class Room
     public List<int> GetEdgeList()
     {
         return this.edge;
+    }
+
+    public List<int> GetCornerList()
+    {
+        return this.corner;
     }
 
     public int GetRoomSIzeX()

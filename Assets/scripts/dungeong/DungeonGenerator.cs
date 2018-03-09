@@ -76,8 +76,10 @@ public class DungeonGenerator : MonoBehaviour {
         // this is bullshit but needed for init the array for now ...
         int[,] map = map = dungeon.GetMap();
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 1; i++)
         {
+            Debug.Log("Room Generation -> This is Room : " + i);
+
             Room room = new Room(util.RandomInt(dungeongSizeXMin, dungeongSizeXMax), util.RandomInt(dungeongSizeYMax, dungeongSizeYMin), roomSizeXMin, roomSizeXMax, roomSizeYMin, roomSizeYMax, dungeon);
             Coridor coridor = new Coridor(room, coridorSizeXMax, coridorSizeXMin, coridorSizeYMax, coridorSizeYMax);
             var roomList = room.GetRoomList();
@@ -152,21 +154,32 @@ public class DungeonGenerator : MonoBehaviour {
 		}
 	}
 
+    // generel update function to update the map
     /// <summary>
-    /// Updates the map.
+    /// Updates the map with the given List.
     /// </summary>
     /// <returns>The map.</returns>
     /// <param name="map">Map.</param>
     /// <param name="roomList">Room list.</param>
-    int[,] UpdateMap(int[,] map, List<int> roomList)
+    /// <param name="dataSetLenght">Data set lenght.</param>
+    public static int[,] UpdateMap(int[,] map, List<int> roomList)
     {
+        // cursors
         int ix = 0;
         int iy = 1;
         int iv = 2;
 
-        int dataSetLenght = 3; 
+        // default dataset lenght is 3 (x,y,value)
+        int dataSetLenght = 3;
 
-        for (int i = 0; i < roomList.Count; i+= dataSetLenght)
+        // debug section
+        Debug.Log("ix " + roomList[ix]);
+        Debug.Log("iy " + roomList[iy]);
+        Debug.Log("iv " + roomList[iv]);
+        Debug.Log("List Lenght " + roomList.Count);
+        Debug.Log("-------------------");
+
+        for (int i = 0; i < roomList.Count; i += dataSetLenght)
         {   
             map[roomList[ix], roomList[iy]] = roomList[iv];
             ix += dataSetLenght;
@@ -180,6 +193,5 @@ public class DungeonGenerator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	}
-
 
 }
