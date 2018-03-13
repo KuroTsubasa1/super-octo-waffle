@@ -96,24 +96,23 @@ public class Coridor{
         // rrom
 
         // shoould be move later
-        bool loop = true;
-        do
-        {
+            
+        // 
             List<int> cornerList = room.GetCornerList(); // dataset of 2 
             if (edgeList[randomCordX] == cornerList[0] || edgeList[randomCordX] == cornerList[2] || edgeList[randomCordX] == cornerList[4] || edgeList[randomCordX] == cornerList[6])
             {
-                randomCordX = NewRandomX();
-                if (edgeList[randomCordX] == cornerList[0] || edgeList[randomCordX] == cornerList[2] || edgeList[randomCordX] == cornerList[4] || edgeList[randomCordX] == cornerList[6])
-                {
-                    loop = false;
-                }
+                Debug.Log("Corner in Coridor Builder Detected");
+                Debug.Log("First Corner " + cornerList[0]);
+                Debug.Log("Second Corner " + cornerList[2]);
+                Debug.Log("Third Corner " + cornerList[4]);
+                Debug.Log("Fourth Corner " + cornerList[6]);
+                Debug.Log("randomCordX " + edgeList[randomCordX]);
             }
-        } while (loop == true);
-       
+
 
         int number = 0;
-        Debug.Log("Startpos X " + cordX);
-        Debug.Log("Startpos Y " + cordY);
+        //Debug.Log("Startpos X " + cordX);
+        //Debug.Log("Startpos Y " + cordY);
 
         // mark start point of coridor
         this.data.Add(cordX );
@@ -139,19 +138,16 @@ public class Coridor{
 
             Debug.Log(edgeList[randomCordX + 2]);
             Debug.Log(edgeList[randomCordX + 3]);
-            Debug.Log("Vertical");
+            Debug.Log("Vertical up");
 
         }
 
         // vertical down
-
-        if(edgeList[randomCordX] == room.GetRoomSIzeX() )
-
         if (edgeList[randomCordX] + 2 == edgeList[randomCordX + 2] && edgeList[randomCordX] + 1 < room.GetRoomSIzeX())
         {
             Debug.Log(edgeList[randomCordX + 2]);
             Debug.Log(edgeList[randomCordX + 3]);
-            Debug.Log("Vertical");
+            Debug.Log("Vertical down");
 
         }
 

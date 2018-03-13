@@ -76,7 +76,7 @@ public class DungeonGenerator : MonoBehaviour {
         // this is bullshit but needed for init the array for now ...
         int[,] map = map = dungeon.GetMap();
 
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 3; i++)
         {
             Debug.Log("Room Generation -> This is Room : " + i);
 
@@ -146,7 +146,7 @@ public class DungeonGenerator : MonoBehaviour {
            
 			if (iy == sizeY-1 && ix < sizeX -1) 
             {
-                Debug.Log(dungeonRow);
+               // Debug.Log(dungeonRow);
                 dungeonRow = "";
 				iy = -1;
 				ix++;
@@ -173,14 +173,16 @@ public class DungeonGenerator : MonoBehaviour {
         int dataSetLenght = 3;
 
         // debug section
+        /*
         Debug.Log("ix " + roomList[ix]);
         Debug.Log("iy " + roomList[iy]);
         Debug.Log("iv " + roomList[iv]);
         Debug.Log("List Lenght " + roomList.Count);
+        */
         Debug.Log("-------------------");
 
         for (int i = 0; i < roomList.Count; i += dataSetLenght)
-        {   
+        {
             map[roomList[ix], roomList[iy]] = roomList[iv];
             ix += dataSetLenght;
             iy += dataSetLenght;

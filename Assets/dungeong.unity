@@ -213,9 +213,23 @@ MonoBehaviour:
   roomSizeXMin: 5
   roomSizeYMax: 90
   roomSizeYMin: 5
+  coridorSizeXMax: 2
+  coridorSizeXMin: 2
+  coridorSizeYMax: 2
+  coridorSizeYMin: 2
   stepSize: 1
   solidWall: {fileID: 1575376927634690, guid: 1a9114e3ad167407090c94ed406bd074, type: 2}
-  wall: {fileID: 1474300062664600, guid: f10b99a96b87b436c94f7c10d640a902, type: 2}
+  wall: {fileID: 1418243002539972, guid: 95db4f270ba1e4745945ae00c2cc6245, type: 2}
+  edge: {fileID: 1418243002539972, guid: 95db4f270ba1e4745945ae00c2cc6245, type: 2}
+  corner: {fileID: 1418243002539972, guid: 95db4f270ba1e4745945ae00c2cc6245, type: 2}
+  floor:
+  - {fileID: 100000, guid: 453ae672855b848dab03d8daca364981, type: 3}
+  - {fileID: 100000, guid: c13fff9a4d1ea4bf19b3a89aba0fe8d9, type: 3}
+  - {fileID: 100000, guid: 38ab69331fc714d2691af6b1546c9e6e, type: 3}
+  - {fileID: 100000, guid: 9afd22d96ed8147abb5679a33d195b5e, type: 3}
+  startPosition: {fileID: 1685570783650902, guid: 9da48929bcfd74e218ba901ecd275053,
+    type: 2}
+  seed: 2
 --- !u!4 &768645342
 Transform:
   m_ObjectHideFlags: 0
@@ -271,6 +285,10 @@ Prefab:
     - target: {fileID: 11400004, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
       propertyPath: movementSettings.ForwardSpeed
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
